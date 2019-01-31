@@ -8,7 +8,7 @@
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.*;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Lidar;
 import frc.robot.subsystems.Catapult;
 import frc.robot.subsystems.Winch;
@@ -35,17 +35,15 @@ public class Robot extends TimedRobot {
   public static Gamepad driverPad;
   public static DriveTrain DriveTrain;
   public static Lidar lidar;
-  public static Shooter shooter;
+  public static Hatch hatch;
   public static Catapult catapult;
   public static Winch winch;
 
   UsbCamera camera;
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 240;
-	public static final int FPS = 20;
+	public static final int FPS = 30;
   
-  private double displacement;
-
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -62,7 +60,6 @@ public class Robot extends TimedRobot {
     oi = new OI();
     DriveTrain = new DriveTrain();
     //lidar = new Lidar();
-    //shooter = new Shooter();
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

@@ -18,7 +18,7 @@ public class RampPosition extends Command {
   {
     this.angle = angle;
     
-    requires(Robot.shooter);
+    requires(Robot.hatch);
   }
 
   // Called just before this Command runs the first time
@@ -30,7 +30,7 @@ public class RampPosition extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.shooter.setRampPosition(angle);
+    Robot.hatch.setRampPosition(angle);
   }
 
   // Make this return true when this Command no longer needs to run execute()

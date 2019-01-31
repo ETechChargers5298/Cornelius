@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Servo;
 
-public class Shooter extends Subsystem {
+public class Hatch extends Subsystem {
   private Solenoid Pusher;
   private Servo Servo;
 
   private Compressor c;
 
-  public Shooter()
+  public Hatch()
   {
     c = new Compressor(0);
 		c.setClosedLoopControl(true);
