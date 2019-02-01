@@ -18,16 +18,33 @@ import edu.wpi.first.wpilibj.command.Command;
 public class OI {
 
   public Gamepad driverPad;
+  Command ramp;
 
   //Experimenting with toggle switch for the ramp system
   boolean rampDown = false;
-  boolean toggle = true;
   boolean rampButton = driverPad.getRawLeftButton();
 
   public OI()
   {
     driverPad = new Gamepad(0);
-     
+
+    if(!rampDown)
+    { 
+      if(rampButton)
+      {
+        rampDown = true;
+        ramp = new RampPosition(1);
+        //Set motor values here
+      } else if(rampDown == true) {
+          if(rampButton)
+        {
+         rampDown = true;
+         //Set motor value here
+         ramp = new RampPosition(0);
+        } 
+      }
+    }
+
     //driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
     //driverPad.getBottomButton().whenReleased(new MoveCatapult(0));
 
