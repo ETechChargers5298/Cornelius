@@ -25,6 +25,7 @@ public class Hatch extends Subsystem {
 		c.setClosedLoopControl(true);
 
     Pusher = new Solenoid(1);
+    Servo = new Servo(1);
     Servo.setAngle(0);
    }
 

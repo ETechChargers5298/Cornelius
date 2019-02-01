@@ -20,6 +20,7 @@ import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Lidar;
 import frc.robot.subsystems.Catapult;
 import frc.robot.subsystems.Winch;
+import frc.robot.subsystems.RampOp;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,6 +39,7 @@ public class Robot extends TimedRobot {
   public static Hatch hatch;
   public static Catapult catapult;
   public static Winch winch;
+  public static RampOp ramp;
 
   UsbCamera camera;
 	public static final int WIDTH = 320;
@@ -55,10 +57,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     //catapult = new Catapult();
+    ramp = new RampOp();
     winch = new Winch();
 
+
     oi = new OI();
+
     DriveTrain = new DriveTrain();
+
     //lidar = new Lidar();
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());

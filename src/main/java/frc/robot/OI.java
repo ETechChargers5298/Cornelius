@@ -11,21 +11,32 @@ import frc.robot.Gamepad;
 import frc.robot.Robot;
 import  frc.robot.commands.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Command;
+
 
 
 public class OI {
 
   public Gamepad driverPad;
-  
+
+  //Experimenting with toggle switch for the ramp system
+  boolean rampDown = false;
+  boolean toggle = true;
+  boolean rampButton = driverPad.getRawLeftButton();
+
   public OI()
   {
     driverPad = new Gamepad(0);
-
-   //driverPad.getRightBumper().whileHeld(new RampPosition(90));
-   //driverPad.getRightBumper().whenReleased(new RampPosition(0));
-
-    ///driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
+     
+    //driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
     //driverPad.getBottomButton().whenReleased(new MoveCatapult(0));
+
+    //Leave this code here it works for the ramp
+    driverPad.getLeftButton().whileHeld(new RampPosition(0.5));
+    driverPad.getLeftButton().whenReleased(new RampPosition(0));
+
+    driverPad.getTopButton().whileHeld(new RampPosition(-0.5));
+    driverPad.getTopButton().whenReleased(new RampPosition(0));
 
     driverPad.getDPadUp().whileHeld(new WinchSpeed(1));
     driverPad.getDPadUp().whenReleased(new WinchSpeed(0));
