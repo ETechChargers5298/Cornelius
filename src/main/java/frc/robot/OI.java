@@ -8,9 +8,7 @@
 package frc.robot;
 
 import frc.robot.Gamepad;
-import frc.robot.Robot;
 import  frc.robot.commands.*;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -18,37 +16,39 @@ import edu.wpi.first.wpilibj.command.Command;
 public class OI {
 
   public Gamepad driverPad;
-  Command ramp;
 
-  //Experimenting with toggle switch for the ramp system
-  boolean rampDown = false;
-  boolean rampButton = driverPad.getRawLeftButton();
+
+  //public Command rampOp;
 
   public OI()
   {
     driverPad = new Gamepad(0);
 
+    //driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
+    //driverPad.getBottomButton().whenReleased(new MoveCatapult(0));
+    
+    /*
     if(!rampDown)
     { 
       if(rampButton)
       {
         rampDown = true;
-        ramp = new RampPosition(1);
+        //rampOp= new RampPosition(1);
         //Set motor values here
       } else if(rampDown == true) {
           if(rampButton)
-        {
-         rampDown = true;
-         //Set motor value here
-         ramp = new RampPosition(0);
+          {
+          rampDown = true;
+          //Set motor value here 
+          //rampOp= new RampPosition(0);
         } 
       }
     }
-
-    //driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
-    //driverPad.getBottomButton().whenReleased(new MoveCatapult(0));
+    */
 
     //Leave this code here it works for the ramp
+
+    /*
     driverPad.getLeftButton().whileHeld(new RampPosition(0.5));
     driverPad.getLeftButton().whenReleased(new RampPosition(0));
 
@@ -60,6 +60,7 @@ public class OI {
 
     driverPad.getDPadDown().whileHeld(new WinchSpeed(-1));
     driverPad.getDPadDown().whenReleased(new WinchSpeed(0));
+    */
   }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

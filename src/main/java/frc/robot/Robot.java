@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.DunkyBoy;
 import frc.robot.subsystems.Lidar;
 import frc.robot.subsystems.Catapult;
 import frc.robot.subsystems.Winch;
@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   public static Gamepad driverPad;
   public static DriveTrain DriveTrain;
   public static Lidar lidar;
-  public static Hatch hatch;
+  public static DunkyBoy slamDunk;
   public static Catapult catapult;
   public static Winch winch;
   public static RampOp ramp;
@@ -49,6 +49,8 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -57,9 +59,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     //catapult = new Catapult();
-    ramp = new RampOp();
-    winch = new Winch();
-
+    //ramp = new RampOp();
+    //winch = new Winch();
 
     oi = new OI();
 
@@ -67,7 +68,8 @@ public class Robot extends TimedRobot {
 
     //lidar = new Lidar();
 
-    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //ur mom gay (Add to Github) Tehehehehehehehe
+
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
 
@@ -151,6 +153,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     
     }
+
 
     //lidar.enableLidar();
 
