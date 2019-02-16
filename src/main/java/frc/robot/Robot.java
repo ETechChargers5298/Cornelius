@@ -19,7 +19,6 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.DunkyBoy;
 import frc.robot.subsystems.Lidar;
 import frc.robot.subsystems.Catapult;
-import frc.robot.subsystems.Winch;
 import frc.robot.subsystems.RampOp;
 
 /**
@@ -38,13 +37,12 @@ public class Robot extends TimedRobot {
   public static Lidar lidar;
   public static DunkyBoy slamDunk;
   public static Catapult catapult;
-  public static Winch winch;
   public static RampOp ramp;
 
   UsbCamera camera;
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 240;
-	public static final int FPS = 30;
+	public static final int FPS = 20;
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -61,10 +59,10 @@ public class Robot extends TimedRobot {
     //catapult = new Catapult();
     //ramp = new RampOp();
     //winch = new Winch();
+    slamDunk = new DunkyBoy();
+    DriveTrain = new DriveTrain();
 
     oi = new OI();
-
-    DriveTrain = new DriveTrain();
 
     //lidar = new Lidar();
 

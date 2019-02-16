@@ -24,6 +24,15 @@ public class OI {
   {
     driverPad = new Gamepad(0);
 
+    driverPad.getDPadUp().whileHeld(new DunkyHands(true));     
+    driverPad.getDPadUp().whenReleased(new DunkyHands(false));
+
+    driverPad.getLeftBumper().whenPressed(new HatchyHands(true));
+    driverPad.getRightBumper().whenPressed(new HatchyHands(false));
+
+    driverPad.getBottomButton().whenPressed(new RampSystem(true));
+    driverPad.getLeftButton().whenPressed(new RampSystem(false));
+
     //driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
     //driverPad.getBottomButton().whenReleased(new MoveCatapult(0));
     

@@ -8,14 +8,16 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.RampPosition;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Servo;
 
 public class DunkyBoy extends Subsystem {
-  private Solenoid Pusher;
-  private Servo Servo;
+ 
+  private Solenoid dunkerSolenoid;
+  private Solenoid hatchSolenoid;
+  private Solenoid rampSolenoid;
+
+  private boolean isActivated;
 
   private Compressor c;
 
@@ -24,23 +26,45 @@ public class DunkyBoy extends Subsystem {
     c = new Compressor(0);
 		c.setClosedLoopControl(true);
 
-    Pusher = new Solenoid(1);
-    Servo = new Servo(1);
-    Servo.setAngle(0);
+    dunkerSolenoid = new Solenoid(0);
+    hatchSolenoid = new Solenoid(1);
+    rampSolenoid = new Solenoid(2);
+
+    isActivated = false;
    }
+  
+  public void setRamp(boolean Value) {
+    rampSolenoid.set(Value); 
+  }
 
- public void pushBall(boolean Value) {
-   Pusher.set(Value); 
- }
+  public void dunkBall(boolean Value) {
+    dunkerSolenoid.set(Value); 
+  }
+  
+  //THIS IS EXPERIMENTAL TOGGLE SWITCH CODE
+  //TODO: TEST!!!!
 
- public void setRampPosition(int angle)
- {
-    Servo.setAngle(angle);
- }
+  public void toggleHatch() {
+    isActivated = !isActivated;
+    hatchSolenoid.set(isActivated); 
+  }
+
+  public void toggleRamp() {
+    isActivated = !isActivated;
+    rampSolenoid.set(isActivated); 
+  }
+
+  public void toggkeBall() {
+    isActivated = !isActivated;
+    dunkerSolenoid.set(isActivated); 
+  }
+  
+  public void grabHatch(boolean Value) {
+    hatchSolenoid.set(Value); 
+  }
 
   public void initDefaultCommand() {
-    setDefaultCommand(new RampPosition(0));
-    // Set the default command for a subsystem here.
+   // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
 }

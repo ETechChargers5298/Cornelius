@@ -10,19 +10,19 @@ package frc.robot.commands;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class WinchSpeed extends Command {
+public class HatchyHands extends Command {
 
-  private double speed;
+  private boolean set;
   
-  public WinchSpeed(double speed) {
-    this.speed = speed;
-    requires(Robot.winch);
+  public HatchyHands(boolean set) {
+    requires(Robot.slamDunk);
+    this.set = set;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.winch.winchSpeed(speed);
+    Robot.slamDunk.grabHatch(set);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -33,7 +33,7 @@ public class WinchSpeed extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
