@@ -13,8 +13,13 @@ import frc.robot.Robot;
 public class RampSystem extends Command {
 
   private boolean set;
+  
+  public RampSystem() {
+    requires(Robot.slamDunk);
+  }
 
   public RampSystem(boolean set) {
+    requires(Robot.slamDunk);
     this.set = set;
   }
 

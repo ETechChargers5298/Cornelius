@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class HatchyHands extends Command {
 
   private boolean set;
+
+  public HatchyHands() {
+    requires(Robot.slamDunk);
+  }
   
   public HatchyHands(boolean set) {
     requires(Robot.slamDunk);

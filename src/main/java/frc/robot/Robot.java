@@ -47,8 +47,6 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-
-
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -65,8 +63,6 @@ public class Robot extends TimedRobot {
     oi = new OI();
 
     //lidar = new Lidar();
-
-    //ur mom gay (Add to Github) Tehehehehehehehe
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

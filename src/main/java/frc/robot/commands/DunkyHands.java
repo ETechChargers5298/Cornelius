@@ -14,6 +14,10 @@ public class DunkyHands extends Command {
 
   private boolean set;
 
+  public DunkyHands() {
+    requires(Robot.slamDunk);
+  }
+
   public DunkyHands(boolean set) {
     requires(Robot.slamDunk);
     this.set = set;
