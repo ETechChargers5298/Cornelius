@@ -13,10 +13,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class HatchyHands extends Command {
 
   private boolean set;
-
-  public HatchyHands() {
-    requires(Robot.slamDunk);
-  }
   
   public HatchyHands(boolean set) {
     requires(Robot.slamDunk);
@@ -26,6 +22,7 @@ public class HatchyHands extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    //Robot.slamDunk.toggleHatch();
     Robot.slamDunk.grabHatch(set);
   }
 

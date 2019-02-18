@@ -10,25 +10,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DunkyHands extends Command {
-
-  private boolean set;
-
-  public DunkyHands() {
-    requires(Robot.slamDunk);
-  }
-
-  public DunkyHands(boolean set) {
-    requires(Robot.slamDunk);
-    this.set = set;
+public class GyroCalibrate extends Command {
+  
+  public GyroCalibrate() {
+    requires(Robot.DriveTrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //Robot.slamDunk.dunkBall(set);
-    Robot.slamDunk.toggleBall();
-
+    Robot.DriveTrain.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run

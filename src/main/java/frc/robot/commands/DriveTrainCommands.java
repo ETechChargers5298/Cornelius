@@ -12,15 +12,17 @@ public class DriveTrainCommands extends Command {
 	}
 
 	protected void initialize(){
+	
 	}
 
 	protected  void execute() {
-	    Robot.DriveTrain.drive(-Robot.oi.driverPad.getLeftY(),
-	    		Robot.oi.driverPad.getLeftX(), 
-				Robot.oi.driverPad.getRightX());
-				
+	    Robot.DriveTrain.drive(Robot.oi.driverPad.getLeftY(),
+				Robot.oi.driverPad.getRightX(), 
+				Robot.oi.driverPad.getLeftX());
+		
 		Robot.DriveTrain.resetGyro();
 
+	
 	}
 		  
 

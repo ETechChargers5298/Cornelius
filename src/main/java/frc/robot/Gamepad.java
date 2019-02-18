@@ -46,7 +46,7 @@ public class Gamepad extends Joystick {
      * @return value of right analog x-axis
      */
     public double getRightX() {
-        return getRawAxis(2);
+        return getRawAxis(4);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Gamepad extends Joystick {
      * @return value of right analog y-axis
      */
     public double getRightY() {
-        return getRawAxis(3);
+        return getRawAxis(5);
     }
 
     /**

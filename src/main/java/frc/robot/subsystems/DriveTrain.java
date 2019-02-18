@@ -69,8 +69,8 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void moveRobot() {
-		frontLeftMotor.set(Math.pow(frontLeftSpeed, 3));
-		rearLeftMotor.set(Math.pow(rearLeftSpeed, 3));
+		frontLeftMotor.set(Math.pow(frontLeftSpeed,3));
+		rearLeftMotor.set(Math.pow(rearLeftSpeed,3));
 		frontRightMotor.set(Math.pow(frontRightSpeed, 3));
 		rearRightMotor.set(Math.pow(rearRightSpeed, 3));
 	}
@@ -79,6 +79,11 @@ public class DriveTrain extends Subsystem {
 		System.out.println("drive is being called");
 		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
 		moveRobot();
+	}
+
+	public void calibrateGyro()
+	{
+		gyro.calibrate();
 	}
 
     public void resetGyro() {

@@ -8,30 +8,36 @@
 package frc.robot;
 
 import frc.robot.Gamepad;
-import  frc.robot.commands.*;
-import edu.wpi.first.wpilibj.command.Command;
-
-
+import frc.robot.commands.*;
 
 public class OI {
 
   public Gamepad driverPad;
-
-
-  //public Command rampOp;
+  public XboxController controller;
 
   public OI()
   {
-    driverPad = new Gamepad(0);
+   // driverPad = new Gamepad(0);
+   controller = new XboxController(0);
+   controller.setDeadZone(0.2);
 
-    driverPad.getDPadUp().whileHeld(new DunkyHands(true));     
-    driverPad.getDPadUp().whenReleased(new DunkyHands(false));
+   controller.a.whenPressed(new HatchyHands(true));
+   controller.x.whenPressed(new HatchyHands(false));
 
-    driverPad.getLeftBumper().whenPressed(new HatchyHands(true));
-    driverPad.getRightBumper().whenPressed(new HatchyHands(false));
+   controller.lb.whenPressed(new GyroCalibrate());
+    
+    /*
+    driverPad.getDPadUp().whenPressed(new DunkyHands());     
 
+    
+    driverPad.getBottomButton().whileHeld(new HatchyHands(true));
+    driverPad.getBottomButton().whenReleased(new HatchyHands(false));
+    */
+
+    /*
     driverPad.getBottomButton().whenPressed(new RampSystem(true));
     driverPad.getLeftButton().whenPressed(new RampSystem(false));
+    */
 
     //driverPad.getBottomButton().whileHeld(new MoveCatapult(1));
     //driverPad.getBottomButton().whenReleased(new MoveCatapult(0));

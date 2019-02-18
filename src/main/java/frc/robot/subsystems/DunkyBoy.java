@@ -26,9 +26,9 @@ public class DunkyBoy extends Subsystem {
     c = new Compressor(0);
 		c.setClosedLoopControl(true);
 
-    dunkerSolenoid = new Solenoid(0);
-    hatchSolenoid = new Solenoid(1);
-    rampSolenoid = new Solenoid(2);
+    hatchSolenoid = new Solenoid(0);
+    dunkerSolenoid = new Solenoid(1);
+    //rampSolenoid = new Solenoid(2);
 
     isActivated = false;
    }
@@ -40,9 +40,16 @@ public class DunkyBoy extends Subsystem {
   public void dunkBall(boolean Value) {
     dunkerSolenoid.set(Value); 
   }
+
+  public void grabHatch(boolean Value) {
+    hatchSolenoid.set(Value); 
+  }
   
   //THIS IS EXPERIMENTAL TOGGLE SWITCH CODE
-  //TODO: TEST!!!!
+  //TODO: TEST!!
+
+  //This activates the hatch solenoid and pushes
+  //the two hooks forwards
 
   public void toggleHatch() {
     isActivated = !isActivated;
@@ -54,15 +61,11 @@ public class DunkyBoy extends Subsystem {
     rampSolenoid.set(isActivated); 
   }
 
-  public void toggkeBall() {
+  public void toggleBall() {
     isActivated = !isActivated;
     dunkerSolenoid.set(isActivated); 
   }
   
-  public void grabHatch(boolean Value) {
-    hatchSolenoid.set(Value); 
-  }
-
   public void initDefaultCommand() {
    // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
