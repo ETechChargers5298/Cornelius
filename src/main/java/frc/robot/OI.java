@@ -17,23 +17,21 @@ public class OI {
 
   public OI()
   {
-   // driverPad = new Gamepad(0);
-   controller = new XboxController(0);
-   controller.setDeadZone(0.2);
+   driverPad = new Gamepad(0);
+   
+   //controller = new XboxController(0);
+   //controller.setDeadZone(0.2);
 
-   controller.a.whenPressed(new HatchyHands(true));
-   controller.x.whenPressed(new HatchyHands(false));
+   //controller.a.whenPressed(new HatchyHands(true));
+   //controller.x.whenPressed(new HatchyHands(false));
 
-   controller.lb.whenPressed(new GyroCalibrate());
+   //controller.lb.whenPressed(new GyroCalibrate());
     
-    /*
     driverPad.getDPadUp().whenPressed(new DunkyHands());     
-
     
-    driverPad.getBottomButton().whileHeld(new HatchyHands(true));
-    driverPad.getBottomButton().whenReleased(new HatchyHands(false));
-    */
-
+    driverPad.getBottomButton().whenPressed(new HatchyHands(true));
+    driverPad.getRightButton().whenPressed(new HatchyHands(false));
+    
     /*
     driverPad.getBottomButton().whenPressed(new RampSystem(true));
     driverPad.getLeftButton().whenPressed(new RampSystem(false));

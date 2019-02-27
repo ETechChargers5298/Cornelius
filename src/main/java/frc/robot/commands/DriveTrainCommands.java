@@ -16,7 +16,7 @@ public class DriveTrainCommands extends Command {
 	}
 
 	protected  void execute() {
-	    Robot.DriveTrain.drive(Robot.oi.driverPad.getLeftY(),
+	    Robot.DriveTrain.drive(-Robot.oi.driverPad.getLeftY(),
 				Robot.oi.driverPad.getRightX(), 
 				Robot.oi.driverPad.getLeftX());
 		

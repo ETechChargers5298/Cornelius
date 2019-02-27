@@ -116,8 +116,6 @@ public class XboxController extends Joystick {
         this.start      = new JoystickButton(this.controller, START_BUTTON_ID);
     }
     
-    
-    
     /**
      * (Constructor #2) This is the other constructor. I would recommend using this one instead
      * as it is unlikely that anything else but the XboxController will be
