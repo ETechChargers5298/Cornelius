@@ -18,7 +18,7 @@ public class OI {
   public OI()
   {
    driverPad = new Gamepad(0);
-   
+
    //controller = new XboxController(0);
    //controller.setDeadZone(0.2);
 
@@ -29,8 +29,7 @@ public class OI {
     
     driverPad.getDPadUp().whenPressed(new DunkyHands());     
     
-    driverPad.getBottomButton().whenPressed(new HatchyHands(true));
-    driverPad.getRightButton().whenPressed(new HatchyHands(false));
+    driverPad.getBottomButton().whenPressed(new HatchyHands());
     
     /*
     driverPad.getBottomButton().whenPressed(new RampSystem(true));

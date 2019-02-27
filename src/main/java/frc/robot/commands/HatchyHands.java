@@ -19,11 +19,14 @@ public class HatchyHands extends Command {
     this.set = set;
   }
 
+  public HatchyHands() {
+    requires(Robot.slamDunk);
+  }
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //Robot.slamDunk.toggleHatch();
-    Robot.slamDunk.grabHatch(set);
+    Robot.slamDunk.toggleHatch();
+    //Robot.slamDunk.grabHatch(set);
   }
 
   // Called repeatedly when this Command is scheduled to run
