@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.DunkyBoy;
 import frc.robot.subsystems.Lidar;
-import frc.robot.subsystems.Catapult;
 import frc.robot.subsystems.RampOp;
 
 /**
@@ -36,7 +35,6 @@ public class Robot extends TimedRobot {
   public static DriveTrain DriveTrain;
   public static Lidar lidar;
   public static DunkyBoy slamDunk;
-  public static Catapult catapult;
   public static RampOp ramp;
 
   UsbCamera camera;
@@ -54,7 +52,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    //catapult = new Catapult();
     //ramp = new RampOp();
     //winch = new Winch();
     slamDunk = new DunkyBoy();
@@ -92,6 +89,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    
   }
 
   @Override

@@ -17,6 +17,10 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class DriveTrain extends Subsystem {
 
+	//Here we declare a basic call to the motors so the program initializes 
+	//The four Talon SRXs and Gyro from the beginning of program runtime. We will 
+	//Declare the ports and objects in the constructor but these declarations will 
+	//Allow us to declare that a static object exists and will be delcared later.
 	private static WPI_TalonSRX frontRightMotor;
 	private static WPI_TalonSRX frontLeftMotor;
 	private static WPI_TalonSRX rearRightMotor;
@@ -24,6 +28,9 @@ public class DriveTrain extends Subsystem {
 
 	private static ADXRS450_Gyro gyro;
 
+	//These are global variables that will store the speed and normalisation value.
+	//Normalisation adds the values passed in for linear, strafe and rotate. 
+	//together and later divides them
 	private double frontLeftSpeed;
 	private double frontRightSpeed;
 	private double rearLeftSpeed;
@@ -31,6 +38,9 @@ public class DriveTrain extends Subsystem {
 	private double norm;
 
 	public DriveTrain() {
+		//This constructor declares the ports for the Talon SRXs and the gyro.
+		//It also declares which motors are inverted and what the speeds at the beginning
+		//Of runtime are supposed to be (START AT 0).
 		frontLeftMotor = new WPI_TalonSRX(3);
 		frontLeftMotor.setInverted(false);
 		frontLeftMotor.set(0.0);
@@ -48,11 +58,16 @@ public class DriveTrain extends Subsystem {
 		frontRightMotor.set(0.0);
 
 		gyro = new ADXRS450_Gyro();
-        
-        resetGyro();
-        gyro.calibrate();
+		
+		//Whenever the robot starts up, just calibrate the gyro and reset the value to 0.
+		gyro.calibrate();
+		resetGyro();
+
 	}
 
+	//This function calculates the speed of all four motors based on input from the gamepad
+	//Generally in Drive Train Commands, we pass onputs from the left and right analog sticks.
+	//We call functions like getLeftY() or getRightX() to get these values.
 	public void calculateVelocities(double linear, double strafe, double rotate) {
 		norm = linear + rotate + strafe;
 
@@ -68,19 +83,24 @@ public class DriveTrain extends Subsystem {
 		//System.out.println(frontLeftSpeed + frontRightSpeed + rearLeftSpeed + rearRightSpeed);
 	}
 
+	//Take the calculated speeds from the previous function and
+	//Set the speeds to the Talon SRXs.
 	public void moveRobot() {
-		frontLeftMotor.set(Math.pow(frontLeftSpeed,3));
-		rearLeftMotor.set(Math.pow(rearLeftSpeed,3));
-		frontRightMotor.set(Math.pow(frontRightSpeed, 3));
-		rearRightMotor.set(Math.pow(rearRightSpeed, 3));
+		frontLeftMotor.set(frontLeftSpeed);
+		rearLeftMotor.set(rearLeftSpeed);
+		frontRightMotor.set(frontRightSpeed);
+		rearRightMotor.set(rearRightSpeed);
 	}
 
+	//This function combines the previous two to constant calculate and set the speeds in the command class.
+	//It passes in values from the joystick that will allow the robot to move in all directions.
 	public void drive(double linearJoystick, double strafeJoystick, double rotateJoystick) {
 		System.out.println("drive is being called");
 		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
 		moveRobot();
 	}
 
+	//Whenever called, the gyro will be calibrated to the direction the robot is facing.
 	public void calibrateGyro()
 	{
 		gyro.calibrate();
