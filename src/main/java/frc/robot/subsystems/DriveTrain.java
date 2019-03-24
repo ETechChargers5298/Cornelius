@@ -101,6 +101,9 @@ public class DriveTrain extends Subsystem {
 	}
 
 	//Whenever called, the gyro will be calibrated to the direction the robot is facing.
+	//All functions below this that pertain to the gyro are called with commands or in other classes
+	//To update gyro values during teleop through button pressed. Some however are automatically called
+	//At the beginning of certain commands like resetGyro everytime DriveTrainCommands runs.
 	public void calibrateGyro()
 	{
 		gyro.calibrate();
@@ -114,10 +117,13 @@ public class DriveTrain extends Subsystem {
         return gyro.getAngle();
     }
 
+	//The default command for this class is DriveTrainCommands and we need to declare this so
+	//The subsystem knows where to look for its basic command to run on.
 	public void initDefaultCommand() {
 		setDefaultCommand(new DriveTrainCommands());
 	}
-
+	
+	//When this is called, set all speeds to zero!
 	public void stop() {
 		drive(0, 0, 0);
 	}
