@@ -30,6 +30,8 @@ import frc.robot.subsystems.RampOp;
 
 public class Robot extends TimedRobot {
 
+  //In this section, we declare basic objects thast will later be initialized in the robotInit function
+  //It's important these remain static because these objects will last the whole runtime of the program.
   public static OI oi;
   public static Gamepad driverPad;
   public static DriveTrain DriveTrain;
@@ -37,11 +39,16 @@ public class Robot extends TimedRobot {
   public static DunkyBoy slamDunk;
   public static RampOp ramp;
 
-  UsbCamera camera;
+  //Here we declare the camera object and some basic parameters for the camera to function properly.
+  //These include framerate and resolution for the camera.
+  private UsbCamera camera;
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 240;
-	public static final int FPS = 20;
+  public static final int FPS = 20;
   
+  //Although not useed, these can be used to declare autonomous commands that will be 
+  //Initialized in the autonomousInit function. The sendable chooser grabs the specific
+  //Command you want to run for the autonomous period.
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -51,6 +58,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    //In order for the robot to know what subsystems exist for the runtime of the robot,
+    //We initialize the objects in here and this allows the robot to see the subsystem
+    //And everything we declared inside of them such as Talon SRXs.
 
     //ramp = new RampOp();
     //winch = new Winch();
@@ -64,6 +75,8 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
 
+    //In this section, we initialize the camera to a USB port and set the parameters declared before 
+    //Such as resolution and framerate.
     camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setResolution(WIDTH, HEIGHT);
 		camera.setFPS(FPS);
@@ -151,6 +164,7 @@ public class Robot extends TimedRobot {
 
   }
 
+  //This function was declared to put numbers into the Smartdashboard and constantly update these values.
   public void updateSmartDashboard()
   {
     SmartDashboard.putNumber("Lidar Value", lidar.getDisplacement());

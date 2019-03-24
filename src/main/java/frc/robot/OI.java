@@ -12,6 +12,8 @@ import frc.robot.commands.*;
 
 public class OI {
 
+  //We have functionality for two different controllers, a Logitech F310 and Xbox Controllers
+  //These are basic object declarations for both of the controllers in OI.
   public Gamepad driverPad;
   public XboxController controller;
 
@@ -19,11 +21,14 @@ public class OI {
   {
    //driverPad = new Gamepad(0);
 
+   //Initialize the controller to a specific port and set a deadzone.
+   //The deadzone keeps the controller from reading analog inputs until you push it a certain distance.
    controller = new XboxController(0);
    controller.setDeadZone(0.15);
 
+   //The commands and button declarations are called whenever these buttons are pressed.
+   //They go into the commands and toggle the booleans to change for the solenoids.
    controller.a.whenPressed(new DunkyHands());
-   
    controller.lb.whenPressed(new HatchyHands());
     
    //driverPad.getDPadUp().whenPressed(new DunkyHands());     

@@ -93,7 +93,7 @@ public class Gamepad extends Joystick {
         return new DPadButton(this, DPadButton.Direction.LEFT);
     }
 
-    /**3
+    /**
      * The right d-pad button.
      * @return if the right d-pad button is pressed
      */
