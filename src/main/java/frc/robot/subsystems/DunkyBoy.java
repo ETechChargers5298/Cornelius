@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class DunkyBoy extends Subsystem {
  
@@ -17,34 +19,42 @@ public class DunkyBoy extends Subsystem {
   //We also need to declare the compressor that will supply the air to the solenoids.
   private Solenoid dunkerSolenoid;
   private Solenoid hatchSolenoid;
-  private Solenoid rampSolenoid;
+  private DoubleSolenoid rampSolenoid;
 
   private Compressor c;
 
   //This boolean is to determine if any of the solenoids will start off open or closed.
   //With solenoids, the values passed in aren't integer or double, the have to be booleans.
-  private boolean isActivated;
+  private boolean hatchIsActivated;
+  private boolean dunkIsActivated;
+  private boolean rampIsActivated;
 
   public DunkyBoy()
   {
     c = new Compressor(0);
 		c.setClosedLoopControl(true);
 
-    hatchSolenoid = new Solenoid(0);
-    dunkerSolenoid = new Solenoid(1);
-    //rampSolenoid = new Solenoid(2);
+    hatchSolenoid = new Solenoid(2);
+    dunkerSolenoid = new Solenoid(0);
+    rampSolenoid = new DoubleSolenoid(5,7);
 
     //The isActivated variable starts false in order to keep all the pneumatic systems 
     //In their starting positions.
-    isActivated = false;
+    hatchIsActivated = false;
+    dunkIsActivated = false;
+    rampSolenoid.set(Value.kForward);    
    }
   
   //Instead of toggling, we pass the values directly into these functions.
   //In the parameters of the command constructors, we pass a true or false value in
   //And then these functions are called to set the values manually. These were experimental
   //And were tested before we had the toggle switches working.
-  public void setRamp(boolean Value) {
-    rampSolenoid.set(Value); 
+  public void setRampForward() {
+    rampSolenoid.set(Value.kForward); 
+  }
+  
+  public void setRampReverse() {
+    rampSolenoid.set(Value.kReverse); 
   }
 
   public void dunkBall(boolean Value) {
@@ -62,22 +72,23 @@ public class DunkyBoy extends Subsystem {
   //the two hooks forwards. When this section is called, it flips the 
   //Value of the isActivated to true and toggles each solenoid for use when called.
   public void toggleHatch() {
-    isActivated = !isActivated;
-    hatchSolenoid.set(isActivated); 
-  }
-
-  public void toggleRamp() {
-    isActivated = !isActivated;
-    rampSolenoid.set(isActivated); 
+    hatchIsActivated = !hatchIsActivated;
+    hatchSolenoid.set(hatchIsActivated); 
   }
 
   public void toggleBall() {
-    isActivated = !isActivated;
-    dunkerSolenoid.set(isActivated); 
+    dunkIsActivated = !dunkIsActivated;
+    dunkerSolenoid.set(dunkIsActivated); 
   }
   
+  /*
+  public void toggleRamp() {
+    rampIsActivated = !rampIsActivated;
+    rampSolenoid.set(rampIsActivated); 
+  }
+  */
+  
   public void initDefaultCommand() {
-   // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+   //setDefaultCommand(new RampSystem());
   }
 }

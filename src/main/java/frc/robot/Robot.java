@@ -7,13 +7,15 @@
 
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+
+import edu.wpi.first.networktables.*;
 
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.DunkyBoy;
@@ -39,18 +41,23 @@ public class Robot extends TimedRobot {
   public static DunkyBoy slamDunk;
   public static RampOp ramp;
 
-  //Here we declare the camera object and some basic parameters for the camera to function properly.
+   //Here we declare the camera object and some basic parameters for the camera to function properly.
   //These include framerate and resolution for the camera.
   private UsbCamera camera;
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 240;
   public static final int FPS = 20;
   
+
   //Although not useed, these can be used to declare autonomous commands that will be 
   //Initialized in the autonomousInit function. The sendable chooser grabs the specific
   //Command you want to run for the autonomous period.
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  private boolean m_LimelightHasValidTarget = false;
+  private double m_LimelightDriveCommand = 0.0;
+  private double m_LimelightSteerCommand = 0.0;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -70,16 +77,15 @@ public class Robot extends TimedRobot {
 
     oi = new OI();
 
-    //lidar = new Lidar();
-
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
-
-    //In this section, we initialize the camera to a USB port and set the parameters declared before 
+       //In this section, we initialize the camera to a USB port and set the parameters declared before 
     //Such as resolution and framerate.
     camera = CameraServer.getInstance().startAutomaticCapture(0);
 		camera.setResolution(WIDTH, HEIGHT);
 		camera.setFPS(FPS);
+    //lidar = new Lidar();
+
+    // chooser.addOption("My Auto", new MyAutoCommand());
+    SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**
@@ -177,12 +183,56 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
 
+    boolean trigger = oi.xboxDrive.b.get();
+
+    if(trigger)
+    {
+      
+    }
+
   }
 
-  /**
+  /** 
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
+  }
+
+  public void updateLimelight()
+  {
+      final double STEER_K = 0.03;                  
+      final double DRIVE_K = 0.26;                   
+      final double DESIRED_TARGET_AREA = 13.0;        
+      final double MAX_DRIVE = 0.7;                  
+
+      double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+      double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+      double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+      double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
+
+      if (tv < 1.0)
+      {
+        m_LimelightHasValidTarget = false;
+        m_LimelightDriveCommand = 0.0;
+        m_LimelightSteerCommand = 0.0;
+        return;
+      }
+
+      m_LimelightHasValidTarget = true;
+
+      // Start with proportional steering
+      double steer_cmd = tx * STEER_K;
+      m_LimelightSteerCommand = steer_cmd;
+
+      // try to drive forward until the target area reaches our desired area
+      double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
+
+      // don't let the robot drive too fast into the goal
+      if (drive_cmd > MAX_DRIVE)
+      {
+        drive_cmd = MAX_DRIVE;
+      }
+      m_LimelightDriveCommand = drive_cmd;
   }
 }

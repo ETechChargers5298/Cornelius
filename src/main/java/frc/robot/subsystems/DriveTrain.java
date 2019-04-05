@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.DriveTrainCommands;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 
@@ -49,7 +50,7 @@ public class DriveTrain extends Subsystem {
 		rearLeftMotor.setInverted(false);
 		rearLeftMotor.set(0.0);
 
-		rearRightMotor = new WPI_TalonSRX(1);
+		rearRightMotor = new WPI_TalonSRX(43);
 		rearRightMotor.setInverted(true);
 		rearRightMotor.set(0.0);
 
@@ -98,6 +99,18 @@ public class DriveTrain extends Subsystem {
 		System.out.println("drive is being called");
 		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
 		moveRobot();
+
+		resetGyro();
+	}
+
+	public void steerInPlace(double rotate)
+	{
+		frontLeftMotor.set(rotate);
+		rearLeftMotor.set(rotate);
+		frontRightMotor.set(-rotate);
+		rearRightMotor.set(-rotate);
+
+
 	}
 
 	//Whenever called, the gyro will be calibrated to the direction the robot is facing.

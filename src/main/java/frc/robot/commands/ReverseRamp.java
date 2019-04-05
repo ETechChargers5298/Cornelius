@@ -7,26 +7,18 @@
 
 package frc.robot.commands;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class RampSystem extends Command {
-  
-  private boolean set;
-  
-  public RampSystem(boolean set) {
-    requires(Robot.slamDunk);
-    this.set = set;
+public class ReverseRamp extends Command {
+  public ReverseRamp() {
+     requires(Robot.slamDunk);
   }
 
-
-  public RampSystem() {
-    requires(Robot.slamDunk);
-  }
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.slamDunk.setRampForward();
+    Robot.slamDunk.setRampReverse();
   }
 
   // Called repeatedly when this Command is scheduled to run

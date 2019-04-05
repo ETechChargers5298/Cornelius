@@ -11,14 +11,15 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HatchyHands extends Command {
-
+  /*
   private boolean set;
   
   public HatchyHands(boolean set) {
     requires(Robot.slamDunk);
     this.set = set;
   }
-
+  */
+  
   public HatchyHands() {
     requires(Robot.slamDunk);
   }
