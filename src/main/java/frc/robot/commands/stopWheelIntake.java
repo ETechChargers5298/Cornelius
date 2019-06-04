@@ -10,15 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class spinWheelIntake extends Command {
-  public spinWheelIntake() {
+public class stopWheelIntake extends Command {
+  public stopWheelIntake() {
     requires(Robot.slamDunk);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.slamDunk.activateWheels(1);
+    Robot.slamDunk.stopWheelRotation();
   }
 
   // Called repeatedly when this Command is scheduled to run

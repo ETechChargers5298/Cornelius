@@ -41,12 +41,12 @@ public class DunkyBoy extends Subsystem {
 
     hatchSolenoid = new Solenoid(2);
     dunkerSolenoid = new Solenoid(0);
-    //wheelIntakeSolenoid = new Solenoid(7);
+    wheelIntakeSolenoid = new Solenoid(7);
 
     
     //rampSolenoid = new DoubleSolenoid(5,7);
 
-    //wheelIntake = new WPI_TalonSRX(5);
+    wheelIntake = new WPI_TalonSRX(1);
 
     //The isActivated variable starts false in order to keep all the pneumatic systems 
     //In their starting positions.

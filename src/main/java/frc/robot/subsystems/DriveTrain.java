@@ -42,15 +42,15 @@ public class DriveTrain extends Subsystem {
 		//This constructor declares the ports for the Talon SRXs and the gyro.
 		//It also declares which motors are inverted and what the speeds at t he beginning ;
 		//Of runtime are supposed to be (START AT 0).
-		frontLeftMotor = new WPI_TalonSRX(3);
+		frontLeftMotor = new WPI_TalonSRX(2);
 		frontLeftMotor.setInverted(false);
 		frontLeftMotor.set(0.0);
 		
-		rearLeftMotor = new WPI_TalonSRX(2);
+		rearLeftMotor = new WPI_TalonSRX(3);
 		rearLeftMotor.setInverted(false);
 		rearLeftMotor.set(0.0);
 
-		rearRightMotor = new WPI_TalonSRX(43);
+		rearRightMotor = new WPI_TalonSRX(5);
 		rearRightMotor.setInverted(true);
 		rearRightMotor.set(0.0);
 

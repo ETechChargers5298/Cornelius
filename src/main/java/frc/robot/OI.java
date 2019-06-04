@@ -37,8 +37,9 @@ public class OI {
    xboxOperator.rb.whenPressed(new DunkyHands());
    xboxOperator.lb.whenPressed(new HatchyHands());
 
-   //xboxOperator.a.whileHeld(new spinWheelIntake());
-   //xboxOperator.start.whenPressed(new userControlWheelIntake());
+   xboxOperator.a.whileHeld(new spinWheelIntake());
+   xboxOperator.a.whenReleased(new stopWheelIntake());
+   xboxOperator.start.whenPressed(new userControlWheelIntake());
 
    /*
    xboxOperator.a.whenPressed(new ReverseRamp());

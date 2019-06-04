@@ -10,26 +10,26 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class spinWheelIntake extends Command {
-  public spinWheelIntake() {
-    requires(Robot.slamDunk);
+public class DriveTrainStrafeRight extends Command {
+  public DriveTrainStrafeRight() {
+    requires(Robot.DriveTrain);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.slamDunk.activateWheels(1);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.DriveTrain.drive(0.0, 0.2, 0.0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
