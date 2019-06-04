@@ -28,7 +28,7 @@ public class DriveTrainCommands extends Command {
 		final double STEER_K = 0.03;                  
 		final double DRIVE_K = 0.26;                   
 		final double DESIRED_TARGET_AREA = 13.0;        
-		final double MAX_DRIVE = 0.7;                  
+		final double MAX_DRIVE = 0.5;                  
   
 		tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
 		tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
@@ -52,14 +52,13 @@ public class DriveTrainCommands extends Command {
 		// try to drive forward until the target area reaches our desired area
 		double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
   
-		// don't let the robot drive too fast into the goal
+		// limits the speed of the robot going forward
 		if (drive_cmd > MAX_DRIVE)
 		{
 		  drive_cmd = MAX_DRIVE;
 		}
 		m_LimelightDriveCommand = drive_cmd;
 	}
-  
 
 	protected void initialize(){
 		
@@ -72,7 +71,8 @@ public class DriveTrainCommands extends Command {
 				Robot.oi.driverPad.getRightX());
 		*/
 
-		updateLimelight();
+		//updateLimelight();
+		
 
 		//This calles the drive function from DriveTrain to set the speeds to the
 		//Analog stick inputs from the gamepad (In this case it is an Xbox Controller).
@@ -80,21 +80,25 @@ public class DriveTrainCommands extends Command {
 				Robot.oi.xboxDrive.rightStick.getX(), 
 				Robot.oi.xboxDrive.leftStick.getX());
 
+				
+		/*
 				boolean trigger = Robot.oi.xboxDrive.b.get();
 			
 				if(trigger)
 				{
-				  if(tv == 1.0)
+				  if(m_LimelightHasValidTarget)
 				  {
 					Robot.DriveTrain.steerInPlace(m_LimelightSteerCommand);
 					System.out.println("Valid target has been acquired");
 				  } else {
+					Robot.DriveTrain.stop();
+				  }
+				} else {
 					Robot.DriveTrain.drive(Robot.oi.xboxDrive.leftStick.getY(),
 										   Robot.oi.xboxDrive.rightStick.getX(), 
 										   Robot.oi.xboxDrive.leftStick.getX());
-				  }
 				}
-
+			*/
 		//Upon every use, the commands cycle back through the init then execute and isFinished.
 		//Evertime the command class cycles, just reset the gyro value to zero to correct the direction.		
 		//Robot.DriveTrain.resetGyro();

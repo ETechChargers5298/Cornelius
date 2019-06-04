@@ -48,16 +48,15 @@ public class Robot extends TimedRobot {
 	public static final int HEIGHT = 240;
   public static final int FPS = 20;
   
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  
+  
 
   //Although not useed, these can be used to declare autonomous commands that will be 
   //Initialized in the autonomousInit function. The sendable chooser grabs the specific
   //Command you want to run for the autonomous period.
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-  private boolean m_LimelightHasValidTarget = false;
-  private double m_LimelightDriveCommand = 0.0;
-  private double m_LimelightSteerCommand = 0.0;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -182,14 +181,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    boolean trigger = oi.xboxDrive.b.get();
-
-    if(trigger)
-    {
-      
-    }
-
   }
 
   /** 
@@ -199,40 +190,4 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
   }
 
-  public void updateLimelight()
-  {
-      final double STEER_K = 0.03;                  
-      final double DRIVE_K = 0.26;                   
-      final double DESIRED_TARGET_AREA = 13.0;        
-      final double MAX_DRIVE = 0.7;                  
-
-      double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
-      double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-      double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
-      double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-
-      if (tv < 1.0)
-      {
-        m_LimelightHasValidTarget = false;
-        m_LimelightDriveCommand = 0.0;
-        m_LimelightSteerCommand = 0.0;
-        return;
-      }
-
-      m_LimelightHasValidTarget = true;
-
-      // Start with proportional steering
-      double steer_cmd = tx * STEER_K;
-      m_LimelightSteerCommand = steer_cmd;
-
-      // try to drive forward until the target area reaches our desired area
-      double drive_cmd = (DESIRED_TARGET_AREA - ta) * DRIVE_K;
-
-      // don't let the robot drive too fast into the goal
-      if (drive_cmd > MAX_DRIVE)
-      {
-        drive_cmd = MAX_DRIVE;
-      }
-      m_LimelightDriveCommand = drive_cmd;
-  }
 }

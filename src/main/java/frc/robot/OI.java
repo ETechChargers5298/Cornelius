@@ -30,11 +30,15 @@ public class OI {
    xboxDrive = new XboxController(0);
    xboxOperator = new XboxController(1);
    xboxDrive.setDeadZone(0.15);
+   xboxOperator.setDeadZone(0.15);
 
    //The commands and button declarations are called whenever these buttons are pressed.
    //They go into the commands and toggle the booleans to change for the solenoids.
    xboxOperator.rb.whenPressed(new DunkyHands());
    xboxOperator.lb.whenPressed(new HatchyHands());
+
+   //xboxOperator.a.whileHeld(new spinWheelIntake());
+   //xboxOperator.start.whenPressed(new userControlWheelIntake());
 
    /*
    xboxOperator.a.whenPressed(new ReverseRamp());

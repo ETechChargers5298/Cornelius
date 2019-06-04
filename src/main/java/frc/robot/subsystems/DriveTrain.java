@@ -40,7 +40,7 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		//This constructor declares the ports for the Talon SRXs and the gyro.
-		//It also declares which motors are inverted and what the speeds at the beginning
+		//It also declares which motors are inverted and what the speeds at t he beginning ;
 		//Of runtime are supposed to be (START AT 0).
 		frontLeftMotor = new WPI_TalonSRX(3);
 		frontLeftMotor.setInverted(false);
@@ -58,12 +58,11 @@ public class DriveTrain extends Subsystem {
 		frontRightMotor.setInverted(true);
 		frontRightMotor.set(0.0);
 
-		gyro = new ADXRS450_Gyro();
+		//gyro = new ADXRS450_Gyro();
 		
 		//Whenever the robot starts up, just calibrate the gyro and reset the value to 0.
-		gyro.calibrate();
-		resetGyro();
-
+		//gyro.calibrate();
+		//resetGyro();
 	}
 
 	//This function calculates the speed of all four motors based on input from the gamepad
@@ -84,23 +83,21 @@ public class DriveTrain extends Subsystem {
 		//System.out.println(frontLeftSpeed + frontRightSpeed + rearLeftSpeed + rearRightSpeed);
 	}
 
-	//Take the calculated speeds from the previous function and
+	//Take the calculated speeds from the previous function and 
 	//Set the speeds to the Talon SRXs.
 	public void moveRobot() {
-		frontLeftMotor.set(frontLeftSpeed);
-		rearLeftMotor.set(rearLeftSpeed);
-		frontRightMotor.set(frontRightSpeed);
-		rearRightMotor.set(rearRightSpeed);
+		frontLeftMotor.set(frontLeftSpeed*0.80);
+		rearLeftMotor.set(rearLeftSpeed*0.80);
+		frontRightMotor.set(frontRightSpeed*0.80);
+		rearRightMotor.set(rearRightSpeed*0.80);
 	}
 
 	//This function combines the previous two to constant calculate and set the speeds in the command class.
 	//It passes in values from the joystick that will allow the robot to move in all directions.
 	public void drive(double linearJoystick, double strafeJoystick, double rotateJoystick) {
-		System.out.println("drive is being called");
+		//System.out.println("drive is being called");
 		calculateVelocities(linearJoystick, strafeJoystick, rotateJoystick);
 		moveRobot();
-
-		resetGyro();
 	}
 
 	public void steerInPlace(double rotate)
@@ -109,8 +106,6 @@ public class DriveTrain extends Subsystem {
 		rearLeftMotor.set(rotate);
 		frontRightMotor.set(-rotate);
 		rearRightMotor.set(-rotate);
-
-
 	}
 
 	//Whenever called, the gyro will be calibrated to the direction the robot is facing.
