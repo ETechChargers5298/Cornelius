@@ -9,6 +9,7 @@ package frc.robot;
 
 import frc.robot.Gamepad;
 import frc.robot.commands.*;
+import frc.robot.commands.ExperimentalCommands.*;
 import edu.wpi.first.cameraserver.CameraServer;
 
 public class OI {
@@ -36,10 +37,16 @@ public class OI {
    //They go into the commands and toggle the booleans to change for the solenoids.
    xboxOperator.rb.whenPressed(new DunkyHands());
    xboxOperator.lb.whenPressed(new HatchyHands());
-
+  /*
    xboxOperator.a.whileHeld(new spinWheelIntake());
    xboxOperator.a.whenReleased(new stopWheelIntake());
+   */
+  
    xboxOperator.start.whenPressed(new userControlWheelIntake());
+   
+
+   xboxOperator.a.whenPressed(new DropWheelIntake());
+   xboxOperator.x.whenPressed(new RaiseWheelIntake());
 
    /*
    xboxOperator.a.whenPressed(new ReverseRamp());
